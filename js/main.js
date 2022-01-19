@@ -45,11 +45,13 @@ function cellClick(){
         if(pos >= 7)
             cell[pos - 7].style.background = playerColorSelection(player);
     }
-    if(checkWin(pos))
-        if(!player)
+    if(checkWin(pos)) {
+        if (!player)
             alert('Red player wins');
         else
             alert('Yellow player wins');
+        restart()
+    }
 }
 
 function cellOver(event){
@@ -117,4 +119,10 @@ function checkWin(pos){
         } catch {}
     }
     return false;
+}
+
+function restart(){
+    for(let i = 0; i < cell.length; ++i)
+        cell[i].style.background = '';
+    player = true;
 }
