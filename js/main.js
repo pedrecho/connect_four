@@ -41,16 +41,18 @@ function cellClick(){
         pos += 7;
     if(pos >= 0) {
         cell[pos].style.background = playerColor(player);
-        player = !player;
-        if(pos >= 7)
-            cell[pos - 7].style.background = playerColorSelection(player);
-    }
-    if(checkWin(pos)) {
-        if (!player)
-            alert('Red player wins');
-        else
-            alert('Yellow player wins');
-        restart()
+        if(checkWin(pos)) {
+            if (player)
+                alert('Red player wins');
+            else
+                alert('Yellow player wins');
+            restart()
+        }
+        else {
+            player = !player;
+            if (pos >= 7)
+                cell[pos - 7].style.background = playerColorSelection(player);
+        }
     }
 }
 
@@ -106,7 +108,7 @@ function hexToRgb(hex) {
 }
 
 function checkWin(pos){
-    let color = hexToRgb(playerColor(!player))
+    let color = hexToRgb(playerColor(player))
     for (let i = 0; i < winpos.length; ++i){
         try{
             let b = true;
